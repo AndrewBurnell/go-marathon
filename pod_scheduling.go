@@ -32,21 +32,23 @@ type PodUpgrade struct {
 // PodPlacement supports constraining which hosts a pod is placed on
 type PodPlacement struct {
 	Constraints           *[]Constraint `json:"constraints"`
-	AcceptedResourceRoles []string    `json:"acceptedResourceRoles,omitempty"`
+	AcceptedResourceRoles []string      `json:"acceptedResourceRoles,omitempty"`
 }
 
 // PodSchedulingPolicy is the overarching pod scheduling policy
 type PodSchedulingPolicy struct {
-	Backoff   *PodBackoff   `json:"backoff,omitempty"`
-	Upgrade   *PodUpgrade   `json:"upgrade,omitempty"`
-	Placement *PodPlacement `json:"placement,omitempty"`
+	Backoff             *PodBackoff          `json:"backoff,omitempty"`
+	Upgrade             *PodUpgrade          `json:"upgrade,omitempty"`
+	Placement           *PodPlacement        `json:"placement,omitempty"`
+	UnreachableStrategy *UnreachableStrategy `json:"unreachableStrategy,omitempty"`
+	KillSelection       string               `json:"killSelection,omitempty"`
 }
 
 // Constraint describes the constraint for pod placement
 type Constraint struct {
-	FieldName  string `json:"fieldName"`
-	Operator   string `json:"operator"`
-	Value      string `json:"value,omitempty"`
+	FieldName string `json:"fieldName"`
+	Operator  string `json:"operator"`
+	Value     string `json:"value,omitempty"`
 }
 
 // NewPodPlacement creates an empty PodPlacement
